@@ -1,0 +1,23 @@
+{
+  "name": "sv_koa2",
+  "version": "1.0.0",
+  "description": "survey node + koa2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ronliruonan/sv-koa2.git"
+  },
+  "keywords": [
+    "node",
+    "koa2"
+  ],
+  "author": "ron li",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ronliruonan/sv-koa2/issues"
+  },
+  "homepage": "https://github.com/ronliruonan/sv-koa2#readme"
+}
