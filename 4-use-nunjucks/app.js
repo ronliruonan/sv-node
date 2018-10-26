@@ -6,7 +6,7 @@ function createEnv(path, opts) {
     watch = opts.watch || false,
     throwOnUndefined = opts.throwOnUndefined || false,
     env = new nunjucks.Environment(
-      new nunjucks.FileSystemLoader('./views', {
+      new nunjucks.FileSystemLoader(path, {
         noCache: noCashe,
         watch: watch,
       }), {
@@ -22,7 +22,7 @@ function createEnv(path, opts) {
   return env;
 }
 
-var env = createEnv('./views', {
+var env = createEnv(__dirname + '/views', {
   watch: true,
   filters: {
     hex: function (n) {
@@ -31,7 +31,5 @@ var env = createEnv('./views', {
   }
 });
 
-var s = env.render('hello.html', { name: '小明' });
+var s = env.render('hello.html', { name: 'Xiao Ming', header: 'Hello ...', body: 'bla bla bla...' });
 console.log(s);
-
-// https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/0014713964925087c29166d8c344a949364e40e2f28dc09000
