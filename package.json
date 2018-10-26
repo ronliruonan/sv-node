@@ -4,6 +4,7 @@
   "description": "survey node + koa2",
   "main": "index.js",
   "scripts": {
+    "start": "node .\\3-url2-koa2\\app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,7 +22,12 @@
   },
   "homepage": "https://github.com/ronliruonan/sv-koa2#readme",
   "dependencies": {
-    "eslint": "^5.7.0",
-    "koa": "^2.5.3"
+    "koa": "^2.5.3",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "nunjucks": "^3.1.3"
+  },
+  "devDependencies": {
+    "eslint": "^5.7.0"
   }
 }
