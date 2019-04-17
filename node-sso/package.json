@@ -1,0 +1,40 @@
+{
+    "name": "node-sso",
+    "version": "1.0.0",
+    "description": "中间层直面前端api，去前端复杂化",
+    "main": "main.ts",
+    "scripts": {
+        "build": "tsc && gulp",
+        "serve": "cross-env NODE_ENV=production node dist/main.js",
+        "serve-dev": "cross-env NODE_ENV=local node dist/main.js",
+        "test": "cross-env NODE_ENV=local node sample/index.js",
+        "dev": "cross-env NODE_ENV=local ts-node-dev --respawn --transpileOnly src/main.ts",
+        "sample": "cross-env NODE_ENV=local ts-node-dev --respawn --transpileOnly sample.ts",
+        "test-service": "cross-env NODE_ENV=local ts-node-dev --respawn --transpileOnly test/testService.ts",
+        "test-api-dinguid": "cross-env NODE_ENV=local ts-node-dev --respawn --transpileOnly test/test-api-dinguid.ts",
+        "test-api-dingcode": "cross-env NODE_ENV=local ts-node-dev --respawn --transpileOnly test/test-api-dingcode.ts",
+        "test-log": "cross-env NODE_ENV=local ts-node-dev --respawn --transpileOnly test/test-log.ts"
+    },
+    "author": "ronanli",
+    "license": "ISC",
+    "devDependencies": {
+        "gulp": "^4.0.0",
+        "nodemon": "^1.18.11",
+        "typescript": "^3.4.2"
+    },
+    "dependencies": {
+        "@types/jsonwebtoken": "^8.3.2",
+        "@types/koa": "^2.0.48",
+        "@types/node": "^11.13.2",
+        "axios": "^0.18.0",
+        "cross-env": "^5.2.0",
+        "cuid": "^2.1.6",
+        "jsonwebtoken": "^8.5.1",
+        "koa": "^2.7.0",
+        "koa-bodyparser": "^4.2.1",
+        "koa-router": "^7.4.0",
+        "koa2-cors": "^2.0.6",
+        "ts-node-dev": "^1.0.0-pre.32",
+        "tslint": "^5.15.0"
+    }
+}
