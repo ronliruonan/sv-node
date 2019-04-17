@@ -1,4 +1,4 @@
-# NODE中间件 SSO
+# Node Typescript 项目，用于sso中间层
 
 ## 技术点
 1. nodemon 自动监听文件变化，开发阶段方便
