@@ -6,54 +6,78 @@ import cuid from 'cuid';
 import { LOG_PATH } from '../config/server.config';
 
 class LogService {
-    private buffer: any[] = [];
-    // private _enterTimes: any[] = [];
+    private _types = ['info', 'error', 'warn'];
+    private _buffer: any[] = [];
     public cuid: string = void 0;
     constructor() {
-        this.buffer.push(new Date().getTime());
+        this._buffer.push(new Date().getTime());
         this.cuid = cuid();
     }
 
 
     public info() {
-        try {
-            this.buffer.push(new Date().getTime());
-            this.buffer.push(this.buffer[this.buffer.length - 1] - this.buffer[0] + ' ms 耗时');
-            const data = this.buffer.join('\n');
+        this._end();
+    }
 
-            this._write(`[info][${this.cuid}]-------${new Date().toLocaleString()}---------\n ${data} \n\n`);
+    public endErr() {
+        this._end(1);
+    }
+
+    public objToStr(obj: any): string {
+        try {
+            return this._objstr(obj).join();
+        } catch (error) {
+            return `objToStr Error: ${JSON.stringify(error)}`;
+        }
+    }
+
+    /**
+     * Obj 对象
+     * @param obj 对象
+     * @param results 结果
+     */
+    private _objstr(obj: any, results: string[] = []): string[] {
+        if (typeof obj !== 'object') return results;
+
+        for (const key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                const item = obj[key];
+                if (typeof item === 'string' || typeof item === 'number') {
+                    results.push(`${key}:${item}`);
+                } else {
+                    results.concat(this._objstr(item, results));
+                }
+            }
+        }
+
+        return results;
+    }
+
+    public push(data: string) {
+        this._buffer.push(data);
+    }
+
+    /**
+     * 计时器结束
+     * @param methodName 自己标识
+     * @param startTime 开始时间
+     */
+    public methodTimeEnd(methodName: string, startTime: Date) {
+        this.push(` - Method: ${methodName}, 耗时: ${new Date().getTime() - startTime.getTime()}ms`);
+    }
+
+    private _end(type: number = 0) {
+        try {
+            this._buffer.push(new Date().getTime());
+            this._buffer.push(this._buffer[this._buffer.length - 1] - this._buffer[0] + ' ms 耗时');
+            const data = this._buffer.join('\n');
+
+            this._write(`[${this._types[type]}][${this.cuid}]-------${new Date().toLocaleString()}---------\n ${data} \n\n`, type);
             this._clear();
         } catch (error) {
             console.log(error);
         }
     }
-
-    // public enterLog(msg: string) {
-    //     console.log(2323)
-    //     const cur = new Date();
-    //     this._enterTimes.push({ key: msg, value: cur });
-    //     this.push(`[${msg}] 进入: ${cur.toLocaleString()}`);
-    //     console.log(this._enterTimes);
-    // }
-    // public exitLog(msg: string) {
-    //     console.log(`1`);
-    //     console.log(msg);
-    //     const cur = new Date();
-    //     const enterTime: Date = this._enterTimes.find(i => i.key === msg);
-    //     const haoshi = enterTime ? cur.getTime() - enterTime.getTime() : '异常';
-
-    //     console.log(haoshi);
-    //     this.push(`[${msg}] 离开: ${cur.toLocaleString()} 总耗: ${haoshi} ms`);
-    // }
-
-    public push(data: string) {
-        this.buffer.push(data);
-    }
-
-    public methodTimeEnd(methodName: string, startTime: Date) {
-        this.push(` - Method: ${methodName}, 耗时: ${new Date().getTime() - startTime.getTime()}ms`);
-    }
-
     private _clear() {
         for (const key in this) {
             if (this.hasOwnProperty(key)) {
@@ -63,13 +87,13 @@ class LogService {
         }
     }
 
-    private _write(data: string): void {
+    private _write(data: string, type: number = 0): void {
         const
             date = new Date(),
             date_y = date.getFullYear(),
             date_m = (date.getMonth() + 1 + '').padStart(2, '0'),
             date_d = date.getDate(),
-            fileName = `${date_y}${date_m}${date_d}.log`,
+            fileName = `${date_y}${date_m}${date_d}_${this._types[type]}.log`,
             path = `${LOG_PATH}/${date_y}${date_m}`,
             filePath = `${path}/${fileName}`;
 

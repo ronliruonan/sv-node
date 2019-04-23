@@ -13,7 +13,8 @@
         "test-service": "cross-env NODE_ENV=local ts-node-dev --respawn --transpileOnly test/testService.ts",
         "test-api-dinguid": "cross-env NODE_ENV=local ts-node-dev --respawn --transpileOnly test/test-api-dinguid.ts",
         "test-api-dingcode": "cross-env NODE_ENV=local ts-node-dev --respawn --transpileOnly test/test-api-dingcode.ts",
-        "test-log": "cross-env NODE_ENV=local ts-node-dev --respawn --transpileOnly test/test-log.ts"
+        "test-log": "cross-env NODE_ENV=local ts-node-dev --respawn --transpileOnly test/test-log.ts",
+        "test-temp": "cross-env NODE_ENV=local ts-node-dev --respawn --transpileOnly test/test-temp.ts"
     },
     "author": "ronanli",
     "license": "ISC",
@@ -32,8 +33,13 @@
         "jsonwebtoken": "^8.5.1",
         "koa": "^2.7.0",
         "koa-bodyparser": "^4.2.1",
+        "koa-convert": "^1.2.0",
         "koa-router": "^7.4.0",
+        "koa-static-cache": "^5.1.2",
         "koa2-cors": "^2.0.6",
+        "swagger-decorator": "0.0.22",
+        "swagger-ui": "^3.22.1",
+        "swagger-ui-dist": "^3.22.1",
         "ts-node-dev": "^1.0.0-pre.32",
         "tslint": "^5.15.0"
     }
