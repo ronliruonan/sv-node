@@ -24,6 +24,7 @@ class JWTService {
 
             return new ResponseBase(detoken);
         } catch (error) {
+            console.log(error);
             return new ResponseBase(error, 132500, 'JWTERRCODE26');
         }
     }
@@ -46,7 +47,7 @@ class JWTService {
                 'user_id': decodeToken.payload['UserId'],
             });
         } catch (error) {
-            // logger.exitLog(toutuo);
+            console.log(error);
 
             return new ResponseBase(error, 132500, 'JWTERRCODE44');
         }

@@ -30,7 +30,7 @@ class AccessTokenService {
 
             return new ResponseBase(data);
         } catch (error) {
-            // logger.exitLog(toutou);
+            console.log(error);
             return new ResponseBase(error, 132500, 'TOKENERRCODE32');
         }
     }

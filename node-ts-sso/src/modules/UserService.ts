@@ -41,6 +41,7 @@ class UserService {
 
             return new ResponseBase(oldUserInfo);
         } catch (error) {
+            console.log(error);
             return new ResponseBase(error, 132500, 'USERERRCODE41--');
         }
     }

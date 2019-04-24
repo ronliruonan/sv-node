@@ -24,11 +24,12 @@ class LogService {
     }
 
     public objToStr(obj: any): string {
-        try {
-            return this._objstr(obj).join();
-        } catch (error) {
-            return `objToStr Error: ${JSON.stringify(error)}`;
-        }
+        return JSON.stringify(obj);
+        // try {
+        //     return this._objstr(obj).join();
+        // } catch (error) {
+        //     return `objToStr Error: ${JSON.stringify(error)}`;
+        // }
     }
 
     /**
