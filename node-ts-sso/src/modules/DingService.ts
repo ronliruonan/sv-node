@@ -34,7 +34,7 @@ class DingService {
             return new ResponseBase(data);
         } catch (error) {
             console.log(error);
-            return new ResponseBase(error, 132500, 'DINGRERRCODE33--');
+            return new ResponseBase(null, 132500, 'DingCode网络异常[38]');
         }
     }
 

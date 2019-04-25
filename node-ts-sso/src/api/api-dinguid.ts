@@ -51,7 +51,7 @@ class ApiDingUID {
             return new ResponseBase(result);
         } catch (error) {
             console.log(error);
-            return new ResponseBase(error, 132500, '非常糟糕');
+            return new ResponseBase(null, 132500, '非常糟糕');
         }
     }
 
@@ -80,7 +80,7 @@ class ApiDingUID {
             return userinfo;
         } catch (error) {
             console.log(error);
-            return new ResponseBase(error, 132500, '非常糟糕 001');
+            return new ResponseBase(null, 132500, '非常糟糕 001');
         }
     }
 
@@ -94,9 +94,6 @@ class ApiDingUID {
             if (userinfo.errcode !== 0) return userinfo;
 
             const { 'user_info': { user_code: user_code } } = userinfo.result;
-            console.log('jar_user_code ', jar_user_code);
-            console.log('user_code ', user_code);
-            console.log('user_info ', userinfo.result['user_info']);
 
             const resOldUserInfo = await this.userservice.GetOldUserInfo(jar_user_code ? jar_user_code : user_code, token, undefined);
             if (resOldUserInfo.errcode !== 0) return resOldUserInfo;
@@ -106,7 +103,7 @@ class ApiDingUID {
             return userinfo;
         } catch (error) {
             console.log(error);
-            return new ResponseBase(error, 132500, '非常糟糕 002');
+            return new ResponseBase(null, 132500, '非常糟糕 002');
         }
     }
 }

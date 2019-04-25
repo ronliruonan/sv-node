@@ -30,9 +30,7 @@ if (cluster.isMaster) {
     });
 }
 
-router.get('/', async (ctx: ParameterizedContext) => {
-    ctx.body = { 'Hello': 'World!' };
-});
+router.get('/', async (ctx: ParameterizedContext) => { ctx.body = { 'Hello': 'World!' }; });
 
 router.get('/auth/duid/:dinguid', async (ctx: ParameterizedContext) => {
     const logger = new LogService();
@@ -55,9 +53,8 @@ router.get('/auth/duid/:dinguid', async (ctx: ParameterizedContext) => {
         ctx.body = resApi;
     } catch (error) {
         console.log(error);
-        logger.push(`err ${JSON.stringify(error)}`);
         logger.endErr();
-        ctx.body = error;
+        ctx.body = { errcode: 1111, errmsg: 1111 };
     }
 });
 
@@ -97,10 +94,8 @@ router.get('/auth/dcode/:dingcode', async (ctx: ParameterizedContext) => {
         ctx.body = resApiDingUID;
     } catch (error) {
         console.log(error);
-        logger.push(`err ${JSON.stringify(error)}`);
         logger.endErr();
-
-        ctx.body = error;
+        ctx.body = { errcode: 1111, errmsg: 1111 };
     }
 });
 
@@ -117,20 +112,15 @@ router.get('/auth/dotnet/duid/:dinguid', async (ctx: ParameterizedContext) => {
         const api = new ApiDingCode();
         const resApi = await api.apiOldUser(dinguid, logger);
 
-        logger.push('100');
         logger.methodTimeEnd('apiOldUser', apiOldUserTime);
-        logger.push('101');
-        logger.push(`apiDingCode 结果: ${logger.objToStr(resApi)}`);
-        logger.push('102');
         logger.push(`4. 返回结构 ${logger.objToStr(resApi)}`);
 
         logger.info();
         ctx.body = resApi;
     } catch (error) {
         console.log(error);
-        logger.push(`err ${JSON.stringify(error)}`);
         logger.endErr();
-        ctx.body = error;
+        ctx.body = { errcode: 1111, errmsg: 1111 };
     }
 });
 
@@ -165,25 +155,16 @@ router.get('/auth/dotnet/dcode/:dingcode', async (ctx: ParameterizedContext) => 
         logger.push(`5. 发起请求 token`);
         const { result: { userid: dinguid } } = resApi;
 
-        logger.push('100');
         const apiOldUserTime = new Date();
-        logger.push('101');
         const resApiDingUID = await api.apiOldUser(dinguid, logger);
-        logger.push('102');
         logger.methodTimeEnd('apiOldUser', apiOldUserTime);
-        logger.push('103');
-        logger.push('难道是因为一个JSON.stringify()报错？');
-        logger.push(`apiOldUser 结果: ${logger.objToStr(resApiDingUID)}`);
-        logger.push('104');
-
         logger.push(`6. 返回结构 ${logger.objToStr(resApiDingUID)}`);
         logger.info();
 
         ctx.body = resApiDingUID;
     } catch (error) {
         console.log(error);
-        logger.push(`err ${JSON.stringify(error)}`);
         logger.endErr();
-        ctx.body = error;
+        ctx.body = { errcode: 1111, errmsg: 1111 };
     }
 });
