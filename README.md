@@ -4,7 +4,7 @@
 ## Node Typescript Sample
 用作SSO中间层，合并SSO周转逻辑，为移动设备减负
 
-[项目地址](https://github.com/ronliruonan/sv-node/tree/master/node-ts-sso)https://github.com/ronliruonan/sv-node/tree/master/node-ts-sso
+项目地址: https://github.com/ronliruonan/sv-node/tree/master/node-ts-sso
 
 ### 技术点
 1. Typescript 尽量使用了ts，面向对象编程
