@@ -16,7 +16,8 @@ const dw = require('../modules/download');
                 aText = tagA.children.find(c => c.type === 'text').data;
 
             return aText.includes('商品房预售许可');
-        });
+        }),
+        queue = new Set();
 
     li商品预售.each((index, ele) => {
         const
@@ -27,9 +28,13 @@ const dw = require('../modules/download');
             tagSpan = ele.children.find(i => i.type === 'tag' && i.name === 'span'),
             spantxt = tagSpan.children.find(i => i.type === 'text').data;
 
-        console.log(`[${spantxt}] [${aulr}] [${atxt}]`);
-    })
+        queue.add({ 'date': spantxt, 'origanl_url': aulr, 'title': atxt });
+    });
 
+    console.log(queue.size);
+    for (const iterator of queue.entries()) {
+        console.log(iterator);
+    }
 
 
 })(); 
