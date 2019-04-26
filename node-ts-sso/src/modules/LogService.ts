@@ -76,7 +76,7 @@ class LogService {
             this._write(`[${this._types[type]}][${this.cuid}]-------${new Date().toLocaleString()}---------\n ${data} \n\n`, type);
             this._clear();
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
     private _clear() {

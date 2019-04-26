@@ -4,11 +4,12 @@
 
 import { ResponseBase } from '../base/response.base';
 import { SSO_JAVA_SERVER_GetDingToken } from '../config/server.config';
-import axservice from '../modules/AxiosService';
 import LogService from '../modules/LogService';
 import CacheService from './CacheService';
+import LaunchService from './LaunchService';
 
 const cacheService = new CacheService();
+const launchService = new LaunchService();
 
 class AccessTokenService {
     private _random = Math.random();
@@ -22,14 +23,18 @@ class AccessTokenService {
      */
     public async getTokenByDUID(duid: string, logger: LogService) {
         try {
+            // 1. 发射前期检查
             if (!duid) return new ResponseBase(undefined, 400, 'DUID无效');
 
+            // 2. 缓存火箭
             const existed = cacheService.existed('duid', duid);
-
             if (existed) return new ResponseBase(existed.token);
 
-            // 发射请求
-            const axres = await axservice.get<string>(`${SSO_JAVA_SERVER_GetDingToken}/${duid}`);
+            // 3. 发射请求
+            const axres = await this._launch<string>(duid);
+            if (!axres) return new ResponseBase(null, 132500, 'Token网络异常[21]');
+
+            // 4. 火箭接收成功
             const { status, data } = axres;
 
             // 填入缓存
@@ -43,9 +48,19 @@ class AccessTokenService {
 
             return new ResponseBase(data);
         } catch (error) {
-            console.log(error.response);
+            console.error(error.response);
             return new ResponseBase(null, 132500, 'Token网络异常[52]');
         }
+    }
+
+    // 火箭发射
+    private async _launch<T>(duid: string) {
+        const reqConfig = {
+            method: 'get',
+            url: `${SSO_JAVA_SERVER_GetDingToken}/${duid}`,
+        };
+        const sbres = await launchService.launch<T>(reqConfig);
+        return sbres;
     }
 }
 

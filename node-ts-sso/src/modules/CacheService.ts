@@ -36,8 +36,6 @@ class CacheService {
     public existed(key: string, keyval: any) {
         this.availableCache();
 
-        // console.log(this._caches.length);
-        // console.log(this._caches);
         return this._caches.find(i => i[key] === keyval);
     }
 

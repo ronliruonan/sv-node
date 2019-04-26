@@ -11,24 +11,9 @@ app.use(cors());
 app.use(bodyParser());
 app.use(router.routes());
 
-const cluster = require('cluster');
-if (cluster.isMaster) {
-    console.log(`主进程${process.pid} 正在运行`);
-
-    const numCPUs = require('os').cpus().length;
-    for (let i = 0; i < numCPUs; i++) {
-        cluster.fork();
-    }
-    cluster.on('exit', (worker: any) => {
-        console.log(`工作进程${worker.process.pid} 已退出`);
-    })
-} else {
-    // 工作进程可以共享任何的TCP连接；
-    // 本sample中共享的是HTTP服务器
-    app.listen(LISTEN_PORT, () => {
-        console.log(`[工作进程 ${process.pid}] starting at ${LISTEN_PORT} on ${new Date().toLocaleString()}`);
-    });
-}
+app.listen(LISTEN_PORT, () => {
+    console.log(`[工作进程 ${process.pid}] starting at ${LISTEN_PORT} on ${new Date().toLocaleString()}`);
+});
 
 router.get('/', async (ctx: ParameterizedContext) => { ctx.body = { 'Hello': 'World!' }; });
 
@@ -52,7 +37,7 @@ router.get('/auth/duid/:dinguid', async (ctx: ParameterizedContext) => {
         logger.info();
         ctx.body = resApi;
     } catch (error) {
-        console.log(error);
+        console.error(error);
         logger.endErr();
         ctx.body = { errcode: 1111, errmsg: 1111 };
     }
@@ -93,7 +78,7 @@ router.get('/auth/dcode/:dingcode', async (ctx: ParameterizedContext) => {
         logger.info();
         ctx.body = resApiDingUID;
     } catch (error) {
-        console.log(error);
+        console.error(error);
         logger.endErr();
         ctx.body = { errcode: 1111, errmsg: 1111 };
     }
@@ -118,7 +103,7 @@ router.get('/auth/dotnet/duid/:dinguid', async (ctx: ParameterizedContext) => {
         logger.info();
         ctx.body = resApi;
     } catch (error) {
-        console.log(error);
+        console.error(error);
         logger.endErr();
         ctx.body = { errcode: 1111, errmsg: 1111 };
     }
@@ -163,7 +148,7 @@ router.get('/auth/dotnet/dcode/:dingcode', async (ctx: ParameterizedContext) => 
 
         ctx.body = resApiDingUID;
     } catch (error) {
-        console.log(error);
+        console.error(error);
         logger.endErr();
         ctx.body = { errcode: 1111, errmsg: 1111 };
     }

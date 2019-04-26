@@ -23,7 +23,7 @@ class ApiDingCode extends ApiDingUID {
 
             return resCheck;
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return new ResponseBase(null, 132500, '非常糟糕016');
         }
     }

@@ -2,11 +2,11 @@ import axios, { AxiosRequestConfig, AxiosPromise } from 'axios';
 
 class AxiosService {
     private _config: AxiosRequestConfig = {
-        timeout: 1000
+        // timeout: 1000 * 10
     };
     constructor() { }
 
-    public launch<T = any>(config: AxiosRequestConfig): AxiosPromise<T> {
+    public ajax<T = any>(config: AxiosRequestConfig): AxiosPromise<T> {
         Object.assign(this._config, config);
 
         return axios(this._config);
@@ -25,7 +25,7 @@ class AxiosService {
     // patch<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T>;
 }
 
-const axlaunch = new AxiosService();
+// const axlaunch = new AxiosService();
 
 
-export default axlaunch;
+export default AxiosService;

@@ -1,7 +1,3 @@
-/**
- * 1
- */
-
 import { ResponseBase } from '../base/response.base';
 import jwt from 'jsonwebtoken';
 import LogService from '../modules/LogService';
@@ -24,7 +20,7 @@ class JWTService {
 
             return new ResponseBase(detoken);
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return new ResponseBase(null, 132500, 'JWTERRCODE26');
         }
     }
@@ -47,7 +43,7 @@ class JWTService {
                 'user_id': decodeToken.payload['UserId'],
             });
         } catch (error) {
-            console.log(error);
+            console.error(error);
 
             return new ResponseBase(null, 132500, 'JWTERRCODE44');
         }

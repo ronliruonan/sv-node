@@ -50,7 +50,7 @@ class ApiDingUID {
 
             return new ResponseBase(result);
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return new ResponseBase(null, 132500, '非常糟糕');
         }
     }
@@ -79,7 +79,7 @@ class ApiDingUID {
 
             return userinfo;
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return new ResponseBase(null, 132500, '非常糟糕 001');
         }
     }
@@ -102,7 +102,7 @@ class ApiDingUID {
 
             return userinfo;
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return new ResponseBase(null, 132500, '非常糟糕 002');
         }
     }
