@@ -1,0 +1,22 @@
+{
+    "name": "node-crawler",
+    "version": "1.0.0",
+    "description": "node 爬虫，爬爬小区的预售证",
+    "main": "index.js",
+    "scripts": {
+        "test": "test",
+        "test-cheerio": "node ./test/test-cheerio.js"
+    },
+    "keywords": [
+        "node",
+        "crawler",
+        "cheerio",
+        "puppeteer"
+    ],
+    "author": "ronan",
+    "license": "ISC",
+    "dependencies": {
+        "cheerio": "^1.0.0-rc.3",
+        "puppeteer-core": "^1.14.0"
+    }
+}
