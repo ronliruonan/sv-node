@@ -17,4 +17,4 @@ function download(url) {
 
 }
 
-exports.download = download;
+exports.DownLoad = download;

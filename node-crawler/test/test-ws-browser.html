@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>预售证</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </head>
 
 <body>
+    <h4></h4>
+    <pre></pre>
     <script>
         ; (function (global) {
             if (!WebSocket) {
@@ -16,12 +19,27 @@
                 return;
             }
 
-            const ws = new WebSocket('ws://localhost:8080', 'echo-protocol');
+            const ws = new WebSocket('ws://192.168.1.104:6203', 'echo-protocol');
             ws.onopen = function (event) {
                 ws.send('Hello');
             };
             ws.onmessage = function (event) {
-                console.log(event.data);
+                ws.send(`Yea ${new Date().toLocaleString()}`);
+                dealMsg(event.data);
+
+            }
+            function dealMsg(data) {
+                data = JSON.parse(data);
+                if (!Array.isArray(data)) return;
+
+                const newStrs = data.map(function (item, index, array) {
+                    return ` ${item['date']} 向阳美域小区(${(item['detail'] + '').includes('向阳美域') ? '是' : '否'}) ${item['title']} `;
+                });
+
+                document.querySelector('title').textContent = moment().format('YYYY-MM-DD HH:mm:ss');
+                document.querySelector('h4').textContent = `更新于: ${moment().format('YYYY-MM-DD HH:mm:ss')}`;
+                document.querySelector('pre').textContent = newStrs.join('\n');
+
             }
         })(window);
 

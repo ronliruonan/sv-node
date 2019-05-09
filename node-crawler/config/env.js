@@ -1,0 +1,1 @@
+exports.BaseUri = 'http://xzspj.bd.gov.cn';

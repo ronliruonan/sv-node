@@ -4,8 +4,9 @@
     "description": "node 爬虫，爬爬小区的预售证",
     "main": "index.js",
     "scripts": {
-        "test": "test",
-        "test-cheerio": "node ./test/test-cheerio.js"
+        "test": "node ./api/websocket.js",
+        "test-cheerio": "node ./test/test-cheerio.js",
+        "test-mongo":"node ./test/test-mongo.js"
     },
     "keywords": [
         "node",
@@ -17,6 +18,7 @@
     "license": "ISC",
     "dependencies": {
         "cheerio": "^1.0.0-rc.3",
+        "mongodb": "^3.2.3",
         "puppeteer-core": "^1.14.0",
         "websocket": "^1.0.28"
     }
