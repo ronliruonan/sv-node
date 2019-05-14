@@ -19,16 +19,17 @@
                 return;
             }
 
-            const ws = new WebSocket('ws://192.168.1.104:6203', 'echo-protocol');
+            const ws = new WebSocket('ws://localhost:6203');
             ws.onopen = function (event) {
                 ws.send('Hello');
             };
             ws.onmessage = function (event) {
-                ws.send(`Yea ${new Date().toLocaleString()}`);
+                ws.send(`Yea`);
                 dealMsg(event.data);
 
             }
             function dealMsg(data) {
+                data = JSON.parse(data);
                 data = JSON.parse(data);
                 if (!Array.isArray(data)) return;
 

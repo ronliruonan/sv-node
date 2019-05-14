@@ -4,14 +4,13 @@ const { main, out } = require('./controller/crawler-file');
 
     async function doit() {
         console.time();
-        await out();
-        // await main();
+        await main();
         console.timeEnd();
-
-        setTimeout(doit, 1000 * 5);
+        console.log(new Date().toISOString())
+        setTimeout(doit, 1000 * 60 * 60 * 3);
     }
 
     doit();
 
-     
+
 })();

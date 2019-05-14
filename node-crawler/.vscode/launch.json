@@ -16,6 +16,12 @@
             "request": "launch",
             "name": "Launch crawler-file",
             "program": "${workspaceFolder}/modules/crawler-file.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "ws",
+            "program": "${workspaceFolder}/ws.js"
         }
     ]
 }

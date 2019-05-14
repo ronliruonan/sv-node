@@ -52,8 +52,8 @@ async function out() {
     try {
         const { readFile } = require('../base/opFs');
         const result = await readFile('crawler.sv');
-        
-        console.log(result);
+
+        return result;
     } catch (error) {
         throw error;
     }
