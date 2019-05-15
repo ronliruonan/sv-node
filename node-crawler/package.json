@@ -6,7 +6,7 @@
     "scripts": {
         "test": "node ./api/websocket.js",
         "test-cheerio": "node ./test/test-cheerio.js",
-        "test-mongo":"node ./test/test-mongo.js"
+        "test-mongo": "node ./test/test-mongo.js"
     },
     "keywords": [
         "node",

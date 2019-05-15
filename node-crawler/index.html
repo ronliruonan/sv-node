@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>向阳美域（向阳88）</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="moment.min.js"></script>
 
 </head>
 
@@ -14,16 +14,18 @@
     <h4></h4>
     <ul></ul>
     <audio src="http://www.ayaron.work/Home.mp3" controls="controls"></audio>
-
+    <button type="button" onclick="dd()">试听音乐提醒</button>
     <script>
+        function dd() {
+            document.querySelector('audio').play();
+        }
         ; (function (global) {
             if (!WebSocket) {
                 alert('您的浏览器不支持ws');
                 return;
             }
-            var eleAudio = document.querySelector('audio');
 
-            const ws = new WebSocket('ws://www.ayaron.work:6203');
+            const ws = new WebSocket('ws://106.12.193.145:6203');
             ws.onopen = function (event) {
                 ws.send('Hello');
             };
@@ -39,14 +41,13 @@
 
                 const fragment = document.createDocumentFragment();
 
-                let sb = false;
+                let realyHappy = false;
                 const inhtmls = data.map(function (item, index, array) {
-                    if (index === 4) {
-                        sb = true;
-                    }
+                    const ishappy = (item['detail'] + '').includes('向阳美域');
+                    realyHappy = ishappy ? true : false;
                     return `<li>
-                        <a href="${item['baseUri']}${item['origanl_url']}">
-                            ${item['date']} 向阳美域小区(${(item['detail'] + '').includes('向阳美域') ? '是' : '否'})
+                        <a href="${item['baseUri']}${item['origanl_url']}" ${ishappy ? 'style="color:red;"' : ''}>
+                            ${item['date']} 向阳美域小区(${ishappy ? '是' : '否'})
                         </a>    
                     </li>`;
                 });
@@ -54,8 +55,9 @@
 
                 document.querySelector('h4').textContent = `最新预售证查询: ${moment().format('YYYY-MM-DD HH:mm:ss')}`;
                 document.querySelector('ul').innerHTML = inhtmls.join('');
-                
-                eleAudio.play();
+                if (realyHappy) {
+                    document.querySelector('audio').play();
+                }
             }
         })(window);
 

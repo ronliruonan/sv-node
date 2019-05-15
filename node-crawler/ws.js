@@ -1,6 +1,3 @@
-/**
- * WebSocket Server
- */
 const WebSocketServer = require('websocket').server;
 const http = require('http');
 let connectionCount = 0;
@@ -20,35 +17,27 @@ const wsServer = new WebSocketServer({
     httpServer: httpServer,
     autoAcceptConnections: false
 });
-console.log('开玩笑呢吧？');
-
 
 // 3. 通讯逻辑，监听ws request
 wsServer.on('request', request => {
     // request is the webSockectRequest object
     // 1. 校验请求源
     function originIsAllowed(request) {
-        console.log('捣乱的origin: ', request.origin);
         return true;
     }
 
     if (!originIsAllowed(request)) {
         request.reject();
-        console.log('非法Origin：' + request.origin);
         return;
     }
 
-    console.log('\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\');
-    console.log(request.origin);
-    console.log(request.accept);
-    console.log('----------------------------------------------------')
     // 2. 接头暗号
     const connection = request.accept(null, request.origin);
 
     // 3. 监听ws message
     connection.on('message', msg => {
         if (msg.type === 'utf8') {
-            console.log('utf8:', new Date().toLocaleString(), msg.utf8Data);
+            console.log(request.origin, new Date().toLocaleString(), msg.utf8Data);
         } else if (msg.type === 'binary') {
             console.log('binary(bytes):', new Date().toLocaleString(), msg.binaryData.length.length);
         }
