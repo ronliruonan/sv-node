@@ -8,11 +8,12 @@ const cors = require('koa2-cors');
 app.use(cors());
 app.use(bodyParse());
 app.use(router.routes());
-app.listen(6203, () => {
-    console.log('ing', 6203)
+app.listen(6204, () => {
+    console.log('ing', 6204)
 });
 
 router.get('/', async (ctx: ParameterizedContext) => {
-    console.log(ctx.request);
-    ctx.body = ctx.querystring;
+    const sb = /(^|&)echostr=([^&]*)(&|$)/g.exec(ctx.querystring)[2];
+    console.log(sb);
+    ctx.body = sb;
 });

@@ -4,7 +4,7 @@
   "description": "微信小程序 node server ",
   "main": "index.js",
   "scripts": {
-    "build": "tsc && gulp",
+    "build": "tsc",
     "serve": "cross-env NODE_ENV=production node dist/main.js",
     "serve-dev": "cross-env NODE_ENV=local node dist/main.js",
     "test": "cross-env NODE_ENV=local node sample/index.js",

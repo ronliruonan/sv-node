@@ -57,7 +57,7 @@ wsServer.on('request', request => {
 
         if (!connection.connected) return;
         connection.sendUTF(JSON.stringify(res));
-        setTimeout(showTime, 1000 * 2);
+        setTimeout(showTime, 1000 * 30);
 
     }
     showTime();

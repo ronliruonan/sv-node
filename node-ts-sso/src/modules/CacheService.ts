@@ -19,7 +19,7 @@ class CacheService {
         const existed = this._caches.find(i => i[key] === keyval);
         if (existed) return existed[vkey] = vval;
 
-        const obj = {};
+        const obj = Object.create(null);
         Object.defineProperty(obj, key, {
             writable: true,
             enumerable: true,
