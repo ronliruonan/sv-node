@@ -27,7 +27,7 @@
         "@types/jsonwebtoken": "^8.3.2",
         "@types/koa": "^2.0.48",
         "@types/node": "^11.13.2",
-        "axios": "^0.18.0",
+        "axios": "^0.21.1",
         "cross-env": "^5.2.0",
         "cuid": "^2.1.6",
         "jsonwebtoken": "^8.5.1",
